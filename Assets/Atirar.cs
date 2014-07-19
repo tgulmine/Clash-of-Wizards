@@ -1,52 +1,35 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Atirar : MonoBehaviour
 {
 
 	public GameObject tiro;
+	public GameObject superTiro;
 	Vector3 mousePos;
 	Vector3 pos;
 	public float speedTiro;
-	private bool cdBolaFogo=false;
-
+	public float speedSuperTiro;
+	public static bool cdTiro = false;
+	public float cdTiroTempo;
+	public static bool cdSuperTiro = false;
+	public float cdSuperTiroTempo;
 	public AudioClip fire1;
 
-	private PlayerScript playerScript;
-
-	void Awake ()
-	{
-		playerScript = tiro.GetComponent<PlayerScript>();
-	}
-
 	// Update is called once per frame
-	void Update ()
-	{
-		BolaFogo();
-
+	void Update () {
+		Tiro();
+		SuperTiro();
 	}
 
-	void BolaFogo() {
-		if (Input.GetMouseButtonDown(0) && cdBolaFogo == false)
-		{	
+	//Funçao da habilidade tiro, usada com o botao esquerdo do mouse
+	void Tiro() {
+		if (Input.GetMouseButtonDown(0) && cdTiro == false) {	
 			mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			mousePos.z = 0;
 			pos = mousePos;
-			//gameObject.collider2D.enabled = false;
 
 			GameObject tiroClone = (GameObject) Instantiate(tiro, transform.position, Quaternion.identity);
-
-			if (PlayerPrefs.GetInt("Cor do Tiro") == 3) { 
-				tiroClone.GetComponent<SpriteRenderer>().color = Color.red;
-			}
-			
-			else if (PlayerPrefs.GetInt("Cor do Tiro") == 1) { 
-				tiroClone.GetComponent<SpriteRenderer>().color = Color.green;
-			}
-			
-			else if (PlayerPrefs.GetInt("Cor do Tiro") == 2) { 
-				tiroClone.GetComponent<SpriteRenderer>().color = Color.blue;
-			}
 
 			float x,y,z;
 
@@ -56,32 +39,43 @@ public class Atirar : MonoBehaviour
 			z = Mathf.Sqrt(Mathf.Pow(x,2)+Mathf.Pow(y,2));
 
 			tiroClone.rigidbody2D.AddForce(new Vector2(x/z*speedTiro, y/z*speedTiro));
-			StartCoroutine("CdBolaFogo");
-			print (pos.x-transform.position.x);
-			print(pos.y-transform.position.y);
-			cdBolaFogo = true;
-
+			StartCoroutine("CdTiro");
+			cdTiro = true;
 		}
 	}
 
+	//Tempo de espera para atirar novamente
+	IEnumerator CdTiro() {
+		yield return new WaitForSeconds(cdTiroTempo);
+		cdTiro = false;
+	}
 
-
-	void OnCollisionEnter(Collision collision){
-				if (collision.gameObject.name == "Personagem") {
-						Destroy (this.gameObject);
-			print(playerScript.hpPlayer);
-				}
-
-	
-				
+	//Funçao da habilidade super tiro, usada com a barra de espaço
+	void SuperTiro() {
+		if (Input.GetKey("space") && cdSuperTiro == false) {	
+			mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			mousePos.z = 0;
+			pos = mousePos;
+			
+			GameObject tiroClone = (GameObject) Instantiate(superTiro, transform.position, Quaternion.identity);
+			
+			float x,y,z;
+			
+			x = pos.x-transform.position.x;
+			y = pos.y-transform.position.y;
+			
+			z = Mathf.Sqrt(Mathf.Pow(x,2)+Mathf.Pow(y,2));
+			
+			tiroClone.rigidbody2D.AddForce(new Vector2(x/z*speedSuperTiro, y/z*speedSuperTiro));
+			StartCoroutine("CdSuperTiro");
+			cdSuperTiro = true;
 		}
-
-
-
-	IEnumerator CdBolaFogo() {
-		yield return new WaitForSeconds(4);
-		cdBolaFogo = false;
 	}
 	
+	//Tempo de espera para usar o super tiro novamente
+	IEnumerator CdSuperTiro() {
+		yield return new WaitForSeconds(cdSuperTiroTempo);
+		cdSuperTiro = false;
+	}
 
 }

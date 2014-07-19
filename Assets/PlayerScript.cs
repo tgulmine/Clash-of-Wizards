@@ -1,45 +1,36 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerScript : MonoBehaviour {
 
 	public float speed;
 	private bool taNoCampo = true;
-	public float hpPlayer = 100;
-	private bool cdTeleporte=false;
+	public static float hpPlayer = 100;
+	public static bool cdTeleporte = false;
 
+	public float cdTeleporteTempo;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-
-
-	void OnGUI(){
-		GUI.Label(new Rect (0,Screen.height - 50,20000,50), "<size=40>HP: "+(int)hpPlayer+"</size>");
-	}
-
+	private Atirar atirar;
 
 	// Update is called once per frame
 	void Update () {
-		MoverPlayer();
-		PerdeVida();
+		MoverPlayer ();
+		PerdeVida ();
 		Rodar ();
-		Teleporte();
-
+		Teleporte ();
+		ChecaGameOver ();
 	}
 	
-	
-	
-	void MoverPlayer() {
 
+	//Funçao para mover o jogador com as setas ou WASD
+	void MoverPlayer() {
 		Vector2 naoBuga;
 		naoBuga = transform.position;
 		transform.position = new Vector2(naoBuga.x+speed*Input.GetAxis("Horizontal")*Time.deltaTime, naoBuga.y+Input.GetAxis("Vertical")*speed*Time.deltaTime);
 	}
 
+	//Funçao da habilidade teleporte, usada com a tecla Q
 	void Teleporte() {
-
 		Vector3 mousePos;
 		Vector3 pos;
 		mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -57,42 +48,49 @@ public class PlayerScript : MonoBehaviour {
 		
 	}
 
+	//Tempo de espera para usar o teleporte novamente
 	IEnumerator CdTeleporte() {
-		yield return new WaitForSeconds(4);
+		yield return new WaitForSeconds(cdTeleporteTempo);
 		cdTeleporte = false;
 	}
 
+	//Reconhece se o jogador colidiu com um tiro, e chama o EsperaTempo()
 	void OnCollisionEnter2D(Collision2D col){
-		if (col.gameObject.tag == "BolaFogo") {
+		if (col.gameObject.tag == "Tiro" || col.gameObject.tag == "SuperTiro") {
+			StartCoroutine("EsperaTempo");
+		}
+		if (col.gameObject.tag == "TiroInimigo") {
+			hpPlayer = hpPlayer - 5;
 			StartCoroutine("EsperaTempo");
 		}
 	}
+
+	//Espera 2 segundos e faz o jogador parar de se mover (para nao andar infinitamente por causa do tiro)
 	IEnumerator EsperaTempo() {
 		yield return new WaitForSeconds(2);
 		rigidbody2D.velocity = Vector3.zero;
-
 	}	
 
-
+	//Checa se o jogador saiu do campo
 	void OnTriggerExit2D(Collider2D other) {
 		if (other.tag == "Campo")
 			taNoCampo = false;
-
 	}
 
+	//Checa se o jogador entrou no campo
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Campo")
-			taNoCampo = true;
-		
+			taNoCampo = true;	
 	}
 
+	//Faz o jogador perder vida se estiver fora do campo
 	void PerdeVida() {
 		if (taNoCampo == false) {
-			hpPlayer -= Time.deltaTime*2;
+			hpPlayer -= Time.deltaTime*4;
 		}
-
 	}
 
+	//Faz o jogador rodar de acordo com a posiçao do mouse
 	void Rodar() {
 		Vector3 mousePos;
 		Vector3 pos;
@@ -105,9 +103,12 @@ public class PlayerScript : MonoBehaviour {
 
 		float angle = Mathf.Atan2(mousePos.x, mousePos.y) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
-
-
 		}
 
-
+	void ChecaGameOver() {
+		if (hpPlayer <= 0) {
+			Application.LoadLevel ("gameover"); 
+		}
+	}
+	
 }

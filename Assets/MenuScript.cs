@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class MenuScript : MonoBehaviour {
@@ -17,7 +17,7 @@ public class MenuScript : MonoBehaviour {
 		bool abrirSair = GUI.Button (new Rect (Screen.width / 2 - 70, Screen.height / 2 + 140, 140, 50), "Sair", botaoJogo);
 		
 		if (abrirJogar) {
-			Application.LoadLevel ("cena1"); 	
+			Application.LoadLevel ("fase1"); 	
 		}
 		
 		if (abrirConf) {
