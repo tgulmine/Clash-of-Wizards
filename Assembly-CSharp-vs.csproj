@@ -46,17 +46,24 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Atirar.cs" />
-     <Compile Include="Assets\CampoScript.cs" />
-     <Compile Include="Assets\ConfScript.cs" />
-     <Compile Include="Assets\DestruirTiro.cs" />
-     <Compile Include="Assets\DestruirTiroInimigo.cs" />
-     <Compile Include="Assets\GUIScript.cs" />
-     <Compile Include="Assets\GameOverScript.cs" />
-     <Compile Include="Assets\InimigoAtirar.cs" />
-     <Compile Include="Assets\InimigoScript.cs" />
-     <Compile Include="Assets\MenuScript.cs" />
-     <Compile Include="Assets\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\Atirar.cs" />
+     <Compile Include="Assets\Scripts\AzulAtirar.cs" />
+     <Compile Include="Assets\Scripts\AzulScript.cs" />
+     <Compile Include="Assets\Scripts\DestruirTiro.cs" />
+     <Compile Include="Assets\Scripts\DestruirTiroInimigo.cs" />
+     <Compile Include="Assets\Scripts\FimScript.cs" />
+     <Compile Include="Assets\Scripts\GUIScript.cs" />
+     <Compile Include="Assets\Scripts\GameOverScript.cs" />
+     <Compile Include="Assets\Scripts\InicioJogo.cs" />
+     <Compile Include="Assets\Scripts\MenuScript.cs" />
+     <Compile Include="Assets\Scripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\PreFaseAzulScript.cs" />
+     <Compile Include="Assets\Scripts\PreFaseVerdeScript.cs" />
+     <Compile Include="Assets\Scripts\PreFaseVermelhoScript.cs" />
+     <Compile Include="Assets\Scripts\VerdeAtirar.cs" />
+     <Compile Include="Assets\Scripts\VerdeScript.cs" />
+     <Compile Include="Assets\Scripts\VermelhoAtirar.cs" />
+     <Compile Include="Assets\Scripts\VermelhoScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
