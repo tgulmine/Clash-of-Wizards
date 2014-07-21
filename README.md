@@ -19,3 +19,6 @@ Tiros de ambos fazem perder 5 pontos de vida.
 Super tiro faz o inimigo perder 15 pontos de vida.
 Se 2 tiros colidem eles se cancelam.
 Os magos inimigos vão ficando mais rápidos com o passar dos níveis.
+
+Observação:
+Jogar na resolução 1024x768.
