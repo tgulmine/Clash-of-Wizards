@@ -7,8 +7,8 @@ Seu objetivo em cada fase é destruir o mago inimigo, use suas habilidades para 
 
 Teclas:
 Setas ou WASD (recomendado) para se mover.
-Botão esquerdo do mouse para atirar.
-Q para teleportar.
+Botão esquerdo do mouse para atirar (tempo de espera é 2 segundos).
+Q para teleportar (tempo de espera é 2 segundps).
 Barra de espaço para usar o super tiro.
 
 Regras do jogo:
