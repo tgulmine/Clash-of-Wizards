@@ -30,6 +30,7 @@ public class PreFaseVerdeScript : MonoBehaviour {
 		//Reseta os valores globais
 		PlayerScript.hpPlayer = 100;
 		PlayerScript.cdTeleporte = false;
+		PlayerScript.taNoCampo = true;
 		Atirar.cdTiro = false;
 		Atirar.cdSuperTiro = false;
 	}

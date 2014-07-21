@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour {
 
 	public float speed;
-	private bool taNoCampo = true;
+	public static bool taNoCampo = true;
 	public static float hpPlayer = 100;
 	public static bool cdTeleporte = false;
 

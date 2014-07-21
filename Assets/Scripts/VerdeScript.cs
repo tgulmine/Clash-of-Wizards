@@ -20,12 +20,17 @@ public class VerdeScript : MonoBehaviour {
 	void Update () {
 		PerdeVida ();
 		Rodar();
-		Mover();
+		ChecaMover();
 		ChecaVida ();
 	}
 	
 	void Awake() {
 		verdeTransform = transform;
+	}
+
+	//Checa se o jogador esta no campo, para nao segui-lo quando ele estiver na lava, chamando a funcao Mover()
+	void ChecaMover() {
+		if (PlayerScript.taNoCampo == true) Mover();
 	}
 
 	//Funcao que faz ele perder vida com o tempo quando esta na lava
