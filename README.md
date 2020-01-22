@@ -1,6 +1,6 @@
 Clash-of-Wizards
 ================
-Jogo para o TCC do curso de Jogos Digitais do Senac, feito por Thiago Gulmine    
+Jogo para o TCC do curso de Jogos Digitais do Senac.   
 
 Objetivo:  
 Seu objetivo em cada fase é destruir o mago inimigo, use suas habilidades para acabar com ele e ser o campeão. Mas cuidado para não se queimar na lava.    
